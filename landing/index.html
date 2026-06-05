@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>やすみどき - スマホで疲れた日に開く、回復の相棒。</title>
+    <meta
+      name="description"
+      content="やすみどきは、スマホで疲れた日に開く、回復の相棒アプリです。つかれを選んで、30秒だけひと息。"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="site-header" aria-label="サイトヘッダー">
+      <a class="brand" href="#top">やすみどき</a>
+      <nav class="nav-links" aria-label="ページ内ナビゲーション">
+        <a href="#how">できること</a>
+        <a href="#screens">ふりかえり</a>
+        <a href="#notify">通知登録</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span></span>スマホ疲れのための小さな部屋</p>
+          <h1 id="hero-title">スマホで疲れた日に開く、<br />回復の相棒。</h1>
+          <p class="hero-lede">
+            つかれを選んで、30秒だけひと息。できない日があっても大丈夫。
+            相棒の部屋が、あなたのペースで少しずつ灯ります。
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#notify">リリース通知を受け取る</a>
+            <a class="button button-secondary" href="#how">世界観を見る</a>
+          </div>
+        </div>
+        <div class="hero-visual" aria-label="アプリのホーム画面プレビュー">
+          <img
+            class="phone phone-main"
+            src="./assets/soft-companion-room-home-v1.png"
+            alt="やすみどきのホーム画面。相棒がやわらかい部屋で座っている。"
+          />
+          <p class="soft-note">今日はここまででOK</p>
+          <span class="leaf leaf-one" aria-hidden="true"></span>
+          <span class="leaf leaf-two" aria-hidden="true"></span>
+          <span class="leaf leaf-three" aria-hidden="true"></span>
+        </div>
+      </section>
+
+      <section class="how" id="how" aria-labelledby="how-title">
+        <div class="section-heading">
+          <p>HOW IT FEELS</p>
+          <h2 id="how-title">何かを禁止するのではなく、<br />戻ってくる場所をつくる。</h2>
+        </div>
+        <div class="steps">
+          <article class="step-card">
+            <span class="step-icon step-icon-sage" aria-hidden="true"></span>
+            <h3>つかれを選ぶ</h3>
+            <p>なんとなく消耗、比較疲れ、情報疲れ。うまく説明できなくても、1タップで大丈夫。</p>
+          </article>
+          <article class="step-card">
+            <span class="step-icon step-icon-yellow" aria-hidden="true"></span>
+            <h3>30秒だけひと息</h3>
+            <p>深呼吸、目を閉じる、水を飲む。大きく変わらなくていい、小さく戻るための行動。</p>
+          </article>
+          <article class="step-card">
+            <span class="step-icon step-icon-peach" aria-hidden="true"></span>
+            <h3>部屋が少し灯る</h3>
+            <p>できた日も、できない日も責めない。相棒の部屋があなたのペースで育ちます。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="screens" id="screens" aria-labelledby="screens-title">
+        <div class="screens-copy">
+          <h2 id="screens-title">疲れた日にも、<br />やさしい記録を。</h2>
+          <p>
+            7日間のふりかえりは、点数でも評価でもありません。
+            よく出たつかれと、効いたひと息を、静かに見返すだけ。
+          </p>
+          <p class="quiet-badge">できない日があっても大丈夫</p>
+        </div>
+        <div class="screens-row" aria-label="アプリ画面プレビュー">
+          <img src="./assets/soft-companion-room-fatigue-check-v1.png" alt="つかれを選ぶ画面" />
+          <img src="./assets/soft-companion-room-recovery-action-v1.png" alt="30秒のひと息画面" />
+          <img src="./assets/soft-companion-room-reflection-v1.png" alt="7日間のふりかえり画面" />
+        </div>
+      </section>
+
+      <section class="notify" id="notify" aria-labelledby="notify-title">
+        <h2 id="notify-title">リリース準備中</h2>
+        <p>
+          スマホで疲れた日に、少しだけ戻ってこられる場所を作っています。
+          公開時にお知らせします。
+        </p>
+        <form class="notify-form" novalidate>
+          <label class="sr-only" for="email">メールアドレス</label>
+          <input id="email" name="email" type="email" autocomplete="email" placeholder="メールアドレス" />
+          <button class="button button-primary" type="submit">通知を受け取る</button>
+          <p class="form-message" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© やすみどき</p>
+    </footer>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
