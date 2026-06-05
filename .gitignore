@@ -39,3 +39,6 @@ fastlane/test_output/
 # Editor
 .vscode/
 .idea/
+
+# Superpowers visual brainstorming companion
+.superpowers/

@@ -133,6 +133,26 @@ Shows a seven-day summary:
 
 The reflection should avoid streak pressure. Missing days are treated neutrally.
 
+## Visual Direction
+
+The approved visual direction is "soft companion room." The interface should feel like a small, quiet recovery room rather than a productivity app. The companion and room are the emotional anchor.
+
+Approved design comps:
+
+- `docs/design/comps/soft-companion-room-home-v1.png`
+- `docs/design/comps/soft-companion-room-fatigue-check-v1.png`
+- `docs/design/comps/soft-companion-room-recovery-action-v1.png`
+- `docs/design/comps/soft-companion-room-reflection-v1.png`
+
+Visual principles:
+
+- Warm off-white, pale sage, muted peach, soft butter yellow, and gentle brown accents.
+- Soft cards and generous whitespace.
+- A cozy room illustration with lamp, plant, cushion, table, and round window motifs.
+- A simple plush-like companion that is original, calm, and non-judgmental.
+- Japanese text rendered by native UI, not embedded in generated mockup images.
+- Avoid hard dashboards, heavy analytics, red alert states, streak pressure, medical aesthetics, or childish clutter.
+
 ## Companion And World
 
 The app contains a small recovery room. The companion is not a coach. It is a quiet presence that sits beside the user.
@@ -154,6 +174,39 @@ The room can change through:
 - Small objects.
 - Seasonal details.
 - Companion posture or expression.
+
+## Teaser Landing Page
+
+Before the app MVP, build a lightweight teaser LP to validate the world and collect release notifications.
+
+Approved LP direction:
+
+- Use the app name `やすみどき`.
+- Lead with the companion and room, not a feature checklist.
+- Hero copy: "スマホで疲れた日に開く、回復の相棒。"
+- Supporting copy should explain the gentle loop: choose fatigue, take a thirty-second breath, and let the room slowly light up.
+- CTA: release notification signup.
+- The LP should feel like a warm invitation, not a clinical or productivity landing page.
+
+Approved LP structure:
+
+1. Hero with the home screen comp, app name, core promise, and release notification CTA.
+2. Three-step section:
+   - つかれを選ぶ.
+   - 30秒だけひと息.
+   - 部屋が少し灯る.
+3. Screenshot/story section using fatigue check, recovery action, and reflection comps.
+4. Final release notification CTA.
+
+Approved motion direction:
+
+- Soft, slow, and optional-feeling motion.
+- The hero screenshot should float subtly, as if the room is breathing.
+- Background light should drift very slowly.
+- Small leaves or decorative details may drift gently.
+- CTA can breathe subtly, but should not pulse like an urgent marketing button.
+- Respect reduced-motion preferences.
+- Avoid fast parallax, scroll-jacking, loud effects, confetti, or gamified reward bursts.
 
 ## Monetization
 
