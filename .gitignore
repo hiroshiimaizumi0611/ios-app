@@ -40,5 +40,8 @@ fastlane/test_output/
 .vscode/
 .idea/
 
+# Git worktrees
+.worktrees/
+
 # Superpowers visual brainstorming companion
 .superpowers/
