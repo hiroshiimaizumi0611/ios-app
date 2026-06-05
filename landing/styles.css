@@ -137,6 +137,11 @@ input {
 
 .hero-copy {
   max-width: 680px;
+  min-width: 0;
+}
+
+.mobile-break {
+  display: none;
 }
 
 .eyebrow {
@@ -606,10 +611,11 @@ input {
 
   .hero-copy {
     justify-self: center;
+    width: 100%;
   }
 
   .hero h1 {
-    font-size: clamp(2.55rem, 13vw, 4.1rem);
+    font-size: clamp(2.55rem, 9vw, 3.6rem);
   }
 
   .hero-actions,
@@ -674,8 +680,22 @@ input {
     gap: 2rem;
   }
 
+  .hero h1 {
+    max-width: 100%;
+    font-size: clamp(1.95rem, 8.8vw, 2.25rem);
+    line-height: 1.22;
+    overflow-wrap: anywhere;
+  }
+
+  .mobile-break {
+    display: block;
+  }
+
   .hero-lede {
+    max-width: 17rem;
+    margin-inline: auto;
     font-size: 0.98rem;
+    overflow-wrap: anywhere;
   }
 
   .hero-actions,
@@ -684,10 +704,20 @@ input {
     flex-direction: column;
   }
 
+  .hero-actions {
+    width: 100%;
+    max-width: 17rem;
+    margin-inline: auto;
+  }
+
   .hero-actions .button,
   .notify-form .button,
   .notify-form input {
     width: 100%;
+  }
+
+  .hero-visual {
+    max-width: 280px;
   }
 
   .step-card {
