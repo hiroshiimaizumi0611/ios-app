@@ -9,9 +9,17 @@ import SwiftUI
 
 @main
 struct YasumidokiApp: App {
+    @State private var model = AppModel(
+        store: YasumidokiStoreFactory.makeStore()
+    )
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            AppRootView()
+                .environment(model)
+                .task {
+                    await model.load()
+                }
         }
     }
 }
