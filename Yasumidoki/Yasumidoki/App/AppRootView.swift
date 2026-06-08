@@ -53,6 +53,14 @@ struct AppRootView: View {
         path.append(AppRoute.recoveryComplete)
     }
 
+    private func recordCompletion() async {
+        await model.completeSelectedAction()
+    }
+
+    private func returnHome() {
+        path = NavigationPath()
+    }
+
     @ViewBuilder
     private func destination(for route: AppRoute) -> some View {
         switch route {
@@ -64,11 +72,13 @@ struct AppRootView: View {
                 onComplete: openRecoveryComplete
             )
         case .recoveryComplete:
-            Text("おつかれさまでした")
-                .navigationTitle("完了")
+            RecoveryCompleteView(
+                companionState: model.snapshot.companionState,
+                onRecordCompletion: recordCompletion,
+                onReturnHome: returnHome
+            )
         case .reflection:
-            Text(model.reflectionSummary.companionMessage)
-                .navigationTitle("7日間")
+            ReflectionView(summary: model.reflectionSummary)
         }
     }
 }

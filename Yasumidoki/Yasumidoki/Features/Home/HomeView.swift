@@ -23,7 +23,7 @@ struct HomeView: View {
                 CompanionRoomView(companionState: companionState)
 
                 VStack(alignment: .leading, spacing: 14) {
-                    Text("いまの疲れを、ひとつだけ選びましょう。")
+                    Text(companionState.growthLevel > 0 ? "相棒の部屋に、小さな明かりが増えました。" : "いまの疲れを、ひとつだけ選びましょう。")
                         .font(.body)
                         .foregroundStyle(YasumidokiTheme.secondaryText)
                         .fixedSize(horizontal: false, vertical: true)
