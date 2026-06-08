@@ -7,30 +7,11 @@ struct AppRootView: View {
 
     var body: some View {
         NavigationStack(path: $path) {
-            VStack(alignment: .leading, spacing: 18) {
-                Text("やすみどき")
-                    .font(.largeTitle.bold())
-                    .foregroundStyle(YasumidokiTheme.primaryText)
-
-                Text("今日はここまででOK")
-                    .font(.title3)
-                    .foregroundStyle(YasumidokiTheme.secondaryText)
-
-                Button("今日のつかれを見る") {
-                    path.append(AppRoute.fatigueCheck)
-                }
-                .buttonStyle(.borderedProminent)
-                .controlSize(.large)
-
-                Button("7日間をふりかえる") {
-                    path.append(AppRoute.reflection)
-                }
-                .buttonStyle(.bordered)
-                .controlSize(.large)
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-            .padding(YasumidokiTheme.contentPadding)
-            .background(YasumidokiTheme.pageBackground)
+            HomeView(
+                companionState: model.snapshot.companionState,
+                onStartCheck: openFatigueCheck,
+                onOpenReflection: openReflection
+            )
             .navigationDestination(for: AppRoute.self) { route in
                 destination(for: route)
             }
@@ -52,6 +33,14 @@ struct AppRootView: View {
                 Text(model.errorMessage ?? "")
             }
         }
+    }
+
+    private func openFatigueCheck() {
+        path.append(AppRoute.fatigueCheck)
+    }
+
+    private func openReflection() {
+        path.append(AppRoute.reflection)
     }
 
     @ViewBuilder
