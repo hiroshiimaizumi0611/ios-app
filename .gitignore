@@ -7,6 +7,9 @@ DerivedData/
 *.xcworkspace/xcuserdata/
 *.xcodeproj/xcuserdata/
 *.xcodeproj/project.xcworkspace/xcuserdata/
+**/*.xcworkspace/xcuserdata/
+**/*.xcodeproj/xcuserdata/
+**/*.xcodeproj/project.xcworkspace/xcuserdata/
 *.xcuserstate
 *.xccheckout
 
@@ -39,6 +42,9 @@ fastlane/test_output/
 # Editor
 .vscode/
 .idea/
+
+# Git worktrees
+.worktrees/
 
 # Superpowers visual brainstorming companion
 .superpowers/
