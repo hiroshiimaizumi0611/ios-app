@@ -6,7 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		2AA3EEB83BE524E4F73EA3C2 /* YasumidokiCore in Frameworks */ = {isa = PBXBuildFile; productRef = 96CFDA048D8785D858C5E795 /* YasumidokiCore */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		1AE0A13E20EC28F67E7B2F0A /* YasumidokiCore */ = {isa = PBXFileReference; lastKnownFileType = folder; name = YasumidokiCore; path = ../Core/YasumidokiCore; sourceTree = "<group>"; };
 		D3817C612FD641FC00E4884D /* Yasumidoki.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Yasumidoki.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -23,6 +28,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2AA3EEB83BE524E4F73EA3C2 /* YasumidokiCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -34,6 +40,7 @@
 			children = (
 				D3817C632FD641FC00E4884D /* Yasumidoki */,
 				D3817C622FD641FC00E4884D /* Products */,
+				1AE0A13E20EC28F67E7B2F0A /* YasumidokiCore */,
 			);
 			sourceTree = "<group>";
 		};
@@ -65,6 +72,7 @@
 			);
 			name = Yasumidoki;
 			packageProductDependencies = (
+				96CFDA048D8785D858C5E795 /* YasumidokiCore */,
 			);
 			productName = Yasumidoki;
 			productReference = D3817C612FD641FC00E4884D /* Yasumidoki.app */;
@@ -328,6 +336,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		96CFDA048D8785D858C5E795 /* YasumidokiCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = YasumidokiCore;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D3817C592FD641FC00E4884D /* Project object */;
 }
