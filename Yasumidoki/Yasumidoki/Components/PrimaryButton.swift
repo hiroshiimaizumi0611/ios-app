@@ -26,8 +26,12 @@ struct PrimaryButton: View {
             }
         }
         .font(.headline)
+        .lineLimit(2)
+        .multilineTextAlignment(.center)
         .foregroundStyle(.white)
         .frame(minHeight: 50)
+        .fixedSize(horizontal: false, vertical: true)
+        .padding(.vertical, 12)
         .padding(.horizontal, 18)
         .background(YasumidokiTheme.sage, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
         .contentShape(RoundedRectangle(cornerRadius: 16, style: .continuous))

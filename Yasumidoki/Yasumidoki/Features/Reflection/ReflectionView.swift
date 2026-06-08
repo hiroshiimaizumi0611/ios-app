@@ -4,6 +4,8 @@ import YasumidokiCore
 struct ReflectionView: View {
     let summary: ReflectionSummary
 
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 18) {
@@ -18,9 +20,16 @@ struct ReflectionView: View {
                         .fixedSize(horizontal: false, vertical: true)
                 }
 
-                HStack(spacing: 12) {
-                    ReflectionStatCard(title: "つかれ記録", value: "\(summary.checkCount)回")
-                    ReflectionStatCard(title: "小さな回復", value: "\(summary.completionCount)回")
+                if dynamicTypeSize.isAccessibilitySize {
+                    VStack(spacing: 12) {
+                        ReflectionStatCard(title: "つかれ記録", value: "\(summary.checkCount)回")
+                        ReflectionStatCard(title: "小さな回復", value: "\(summary.completionCount)回")
+                    }
+                } else {
+                    HStack(spacing: 12) {
+                        ReflectionStatCard(title: "つかれ記録", value: "\(summary.checkCount)回")
+                        ReflectionStatCard(title: "小さな回復", value: "\(summary.completionCount)回")
+                    }
                 }
 
                 if let fatigueType = summary.mostCommonFatigueType {

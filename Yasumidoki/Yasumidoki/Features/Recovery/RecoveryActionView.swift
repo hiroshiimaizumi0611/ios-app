@@ -43,6 +43,8 @@ struct RecoveryActionView: View {
 
                 Text(isFinished ? "できました" : "あと \(remainingSeconds)秒")
                     .font(.title2.bold())
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.72)
                     .foregroundStyle(YasumidokiTheme.primaryText)
                     .contentTransition(reduceMotion ? .identity : .numericText())
             }

@@ -36,6 +36,8 @@ struct FatigueCheckView: View {
                                 Text(fatigueType.displayName)
                                     .font(.headline)
                                     .foregroundStyle(YasumidokiTheme.primaryText)
+                                    .multilineTextAlignment(.leading)
+                                    .fixedSize(horizontal: false, vertical: true)
 
                                 Spacer()
 
