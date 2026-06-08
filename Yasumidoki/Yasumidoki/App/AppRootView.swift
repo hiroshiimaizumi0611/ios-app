@@ -43,15 +43,26 @@ struct AppRootView: View {
         path.append(AppRoute.reflection)
     }
 
+    private func recordFatigue(_ fatigueType: FatigueType, memo: String?) async {
+        if await model.recordFatigue(fatigueType, memo: memo) != nil {
+            path.append(AppRoute.recoveryAction(fatigueType))
+        }
+    }
+
+    private func openRecoveryComplete() {
+        path.append(AppRoute.recoveryComplete)
+    }
+
     @ViewBuilder
     private func destination(for route: AppRoute) -> some View {
         switch route {
         case .fatigueCheck:
-            Text("つかれチェック")
-                .navigationTitle("つかれチェック")
-        case .recoveryAction:
-            Text("小さな回復")
-                .navigationTitle("小さな回復")
+            FatigueCheckView(onContinue: recordFatigue)
+        case let .recoveryAction(fatigueType):
+            RecoveryActionView(
+                action: model.selectedAction ?? RecoveryCatalog.default.action(for: fatigueType),
+                onComplete: openRecoveryComplete
+            )
         case .recoveryComplete:
             Text("おつかれさまでした")
                 .navigationTitle("完了")
