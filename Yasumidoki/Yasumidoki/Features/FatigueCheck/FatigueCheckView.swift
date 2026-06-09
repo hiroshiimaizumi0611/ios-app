@@ -9,72 +9,67 @@ struct FatigueCheckView: View {
     @State private var isSaving = false
 
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 18) {
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("いま近いものをひとつ")
-                        .font(.title.bold())
-                        .foregroundStyle(YasumidokiTheme.primaryText)
+        ZStack {
+            RoomBackdropView(imageOpacity: 0.50, blurRadius: 2)
+                .ignoresSafeArea()
 
-                    Text("正確に選ばなくて大丈夫。あとで変えたくなっても、それでOKです。")
-                        .font(.body)
-                        .foregroundStyle(YasumidokiTheme.secondaryText)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
+            ScrollView(showsIndicators: false) {
+                VStack(spacing: 18) {
+                    SoftScreenHeader(title: "やすみどき")
 
-                VStack(spacing: 10) {
-                    ForEach(FatigueType.allCases) { fatigueType in
-                        Button {
-                            selectedFatigueType = fatigueType
-                        } label: {
-                            HStack(spacing: 12) {
-                                Image(systemName: iconName(for: fatigueType))
-                                    .font(.headline)
+                    SoftPanel(horizontalPadding: 18, verticalPadding: 28) {
+                        VStack(spacing: 22) {
+                            VStack(spacing: 10) {
+                                Image(systemName: "leaf.fill")
+                                    .font(.title3.weight(.semibold))
                                     .foregroundStyle(YasumidokiTheme.sage)
-                                    .frame(width: 28)
+                                    .accessibilityHidden(true)
 
-                                Text(fatigueType.displayName)
-                                    .font(.headline)
+                                Text("いまのつかれは？")
+                                    .font(.system(.title2, design: .rounded).weight(.semibold))
                                     .foregroundStyle(YasumidokiTheme.primaryText)
-                                    .multilineTextAlignment(.leading)
+
+                                Text("正確に選ばなくて大丈夫。いま近いものをひとつだけ。")
+                                    .font(.subheadline)
+                                    .multilineTextAlignment(.center)
+                                    .foregroundStyle(YasumidokiTheme.secondaryText)
                                     .fixedSize(horizontal: false, vertical: true)
-
-                                Spacer()
-
-                                Image(systemName: selectedFatigueType == fatigueType ? "checkmark.circle.fill" : "circle")
-                                    .font(.title3)
-                                    .foregroundStyle(selectedFatigueType == fatigueType ? YasumidokiTheme.sage : YasumidokiTheme.secondaryText)
                             }
-                            .padding(16)
-                            .frame(minHeight: 58)
-                            .background(
-                                selectedFatigueType == fatigueType ? YasumidokiTheme.butter.opacity(0.30) : YasumidokiTheme.cardBackground,
-                                in: RoundedRectangle(cornerRadius: 18, style: .continuous)
-                            )
+
+                            VStack(spacing: 12) {
+                                ForEach(FatigueType.allCases) { fatigueType in
+                                    fatigueButton(for: fatigueType)
+                                }
+                            }
                         }
-                        .buttonStyle(.plain)
-                        .accessibilityLabel("\(fatigueType.displayName)を選択")
-                        .accessibilityValue(selectedFatigueType == fatigueType ? "選択中" : "未選択")
                     }
-                }
 
-                TextField("ひとことメモ（任意）", text: $memo, axis: .vertical)
-                    .font(.body)
-                    .lineLimit(2...4)
-                    .padding(14)
-                    .background(YasumidokiTheme.cardBackground, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+                    SoftPanel(horizontalPadding: 18, verticalPadding: 16, cornerRadius: 26) {
+                        HStack(alignment: .top, spacing: 14) {
+                            SoftIconBubble(systemImage: "pencil", tint: YasumidokiTheme.peach, size: 54)
 
-                PrimaryButton(isSaving ? "保存しています" : "小さな回復へ", systemImage: "arrow.right") {
-                    continueToRecovery()
+                            TextField("ひとことメモ（任意）", text: $memo, axis: .vertical)
+                                .font(.body)
+                                .foregroundStyle(YasumidokiTheme.primaryText)
+                                .lineLimit(2...4)
+                        }
+                    }
+
+                    PrimaryButton(isSaving ? "保存しています" : "相棒に伝える", systemImage: "sparkle") {
+                        continueToRecovery()
+                    }
+                    .disabled(selectedFatigueType == nil || isSaving)
+                    .opacity(selectedFatigueType == nil || isSaving ? 0.48 : 1)
+                    .padding(.horizontal, 26)
+                    .padding(.bottom, 28)
                 }
-                .disabled(selectedFatigueType == nil || isSaving)
-                .opacity(selectedFatigueType == nil || isSaving ? 0.48 : 1)
+                .padding(.horizontal, YasumidokiTheme.contentPadding)
             }
-            .padding(YasumidokiTheme.contentPadding)
         }
         .background(YasumidokiTheme.pageBackground)
-        .navigationTitle("つかれチェック")
-        .navigationBarTitleDisplayMode(.inline)
+        .scrollDismissesKeyboard(.interactively)
+        .navigationBarBackButtonHidden()
+        .toolbar(.hidden, for: .navigationBar)
     }
 
     private func continueToRecovery() {
@@ -87,18 +82,72 @@ struct FatigueCheckView: View {
         }
     }
 
+    private func fatigueButton(for fatigueType: FatigueType) -> some View {
+        let isSelected = selectedFatigueType == fatigueType
+
+        return Button {
+            selectedFatigueType = fatigueType
+        } label: {
+            HStack(spacing: 14) {
+                SoftIconBubble(
+                    systemImage: iconName(for: fatigueType),
+                    tint: bubbleTint(for: fatigueType),
+                    size: 62
+                )
+
+                Text(fatigueType.displayName)
+                    .font(.headline)
+                    .foregroundStyle(YasumidokiTheme.primaryText)
+                    .multilineTextAlignment(.leading)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                Spacer(minLength: 12)
+
+                Image(systemName: isSelected ? "checkmark.circle.fill" : "chevron.right")
+                    .font(.title3.weight(.medium))
+                    .foregroundStyle(isSelected ? YasumidokiTheme.sage : YasumidokiTheme.secondaryText.opacity(0.62))
+                    .accessibilityHidden(true)
+            }
+            .padding(.vertical, 12)
+            .padding(.horizontal, 14)
+            .frame(minHeight: 78)
+            .background(
+                isSelected ? YasumidokiTheme.butter.opacity(0.36) : YasumidokiTheme.elevatedBackground.opacity(0.78),
+                in: RoundedRectangle(cornerRadius: 24, style: .continuous)
+            )
+            .overlay {
+                RoundedRectangle(cornerRadius: 24, style: .continuous)
+                    .strokeBorder(isSelected ? YasumidokiTheme.sage.opacity(0.32) : .white.opacity(0.6), lineWidth: 1)
+            }
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel("\(fatigueType.displayName)を選択")
+        .accessibilityValue(isSelected ? "選択中" : "未選択")
+    }
+
     private func iconName(for fatigueType: FatigueType) -> String {
         switch fatigueType {
         case .vagueDepletion:
-            "cloud"
+            "leaf"
         case .comparisonFatigue:
-            "person.2"
+            "scalemass"
         case .informationFatigue:
-            "text.page"
+            "info.circle"
         case .unconsciousScrolling:
-            "hand.tap"
+            "iphone"
         case .doNotWantAnything:
-            "cup.and.saucer"
+            "cloud"
+        }
+    }
+
+    private func bubbleTint(for fatigueType: FatigueType) -> Color {
+        switch fatigueType {
+        case .vagueDepletion, .doNotWantAnything:
+            YasumidokiTheme.sage
+        case .comparisonFatigue:
+            YasumidokiTheme.peach
+        case .informationFatigue, .unconsciousScrolling:
+            YasumidokiTheme.honey
         }
     }
 }

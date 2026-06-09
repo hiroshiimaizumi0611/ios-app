@@ -29,12 +29,13 @@ struct PrimaryButton: View {
         .lineLimit(2)
         .multilineTextAlignment(.center)
         .foregroundStyle(.white)
-        .frame(minHeight: 50)
+        .frame(minHeight: 56)
         .fixedSize(horizontal: false, vertical: true)
         .padding(.vertical, 12)
         .padding(.horizontal, 18)
-        .background(YasumidokiTheme.sage, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
-        .contentShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+        .background(YasumidokiTheme.sage, in: Capsule())
+        .shadow(color: YasumidokiTheme.shadow.opacity(0.12), radius: 16, y: 8)
+        .contentShape(Capsule())
     }
 }
 

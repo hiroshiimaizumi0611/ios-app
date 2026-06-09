@@ -3,9 +3,18 @@ import SwiftUI
 struct ReflectionStatCard: View {
     let title: String
     let value: String
+    let systemImage: String
+
+    init(title: String, value: String, systemImage: String = "leaf") {
+        self.title = title
+        self.value = value
+        self.systemImage = systemImage
+    }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 10) {
+            SoftIconBubble(systemImage: systemImage, tint: YasumidokiTheme.butter, size: 48)
+
             Text(title)
                 .font(.footnote.weight(.semibold))
                 .foregroundStyle(YasumidokiTheme.secondaryText)
@@ -14,9 +23,13 @@ struct ReflectionStatCard: View {
                 .font(.title2.bold())
                 .foregroundStyle(YasumidokiTheme.primaryText)
         }
-        .padding(16)
+        .padding(14)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(YasumidokiTheme.cardBackground, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+        .background(YasumidokiTheme.elevatedBackground.opacity(0.76), in: RoundedRectangle(cornerRadius: 22, style: .continuous))
+        .overlay {
+            RoundedRectangle(cornerRadius: 22, style: .continuous)
+                .strokeBorder(.white.opacity(0.62), lineWidth: 1)
+        }
     }
 }
 
