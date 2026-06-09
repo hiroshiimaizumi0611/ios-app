@@ -5,48 +5,51 @@ struct HomeView: View {
     let companionState: CompanionState
     let onStartCheck: () -> Void
     let onOpenReflection: () -> Void
+    @ScaledMetric(relativeTo: .largeTitle) private var heroHeight: CGFloat = 520
 
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 22) {
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("やすみどき")
-                        .font(.largeTitle.bold())
-                        .foregroundStyle(YasumidokiTheme.primaryText)
+        VStack(spacing: 0) {
+            ScrollView(showsIndicators: false) {
+                VStack(spacing: 0) {
+                    HomeRoomHeroView(companionState: companionState)
+                        .frame(height: heroHeight)
 
-                    Text("今日はここまででOK")
-                        .font(.title3)
-                        .foregroundStyle(YasumidokiTheme.secondaryText)
-                }
-                .accessibilityElement(children: .combine)
+                    VStack(spacing: 16) {
+                        SoftActionCard(
+                            title: "今日のつかれを見てみる",
+                            subtitle: companionState.growthLevel > 0 ? "相棒と一緒に、いまの感じをひとつだけ" : "ひとつ選ぶだけでOK",
+                            systemImage: "camera.macro",
+                            accent: YasumidokiTheme.sage,
+                            isProminent: true,
+                            action: onStartCheck
+                        )
 
-                CompanionRoomView(companionState: companionState)
+                        SoftActionCard(
+                            title: "7日間をふりかえる",
+                            subtitle: "疲れの流れを、軽くながめる",
+                            systemImage: "calendar",
+                            accent: YasumidokiTheme.honey,
+                            action: onOpenReflection
+                        )
 
-                VStack(alignment: .leading, spacing: 14) {
-                    Text(companionState.growthLevel > 0 ? "相棒の部屋に、小さな明かりが増えました。" : "いまの疲れを、ひとつだけ選びましょう。")
-                        .font(.body)
-                        .foregroundStyle(YasumidokiTheme.secondaryText)
-                        .fixedSize(horizontal: false, vertical: true)
-
-                    PrimaryButton("今日のつかれを見る", systemImage: "leaf", action: onStartCheck)
-
-                    Button(action: onOpenReflection) {
-                        Label("7日間をふりかえる", systemImage: "calendar")
-                            .font(.headline)
-                            .frame(maxWidth: .infinity)
-                            .frame(minHeight: 50)
+                        QuietStatusPill(text: "今日はここまででOK")
                     }
-                    .buttonStyle(.bordered)
-                    .tint(YasumidokiTheme.sage)
-                    .contentShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                    .padding(.horizontal, YasumidokiTheme.contentPadding)
+                    .padding(.top, -72)
+                    .padding(.bottom, 26)
                 }
-                .padding(18)
-                .background(YasumidokiTheme.cardBackground, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+                .frame(maxWidth: .infinity)
             }
-            .padding(YasumidokiTheme.contentPadding)
-            .frame(maxWidth: .infinity, alignment: .leading)
+
+            HomeShortcutDock(
+                onStartCheck: onStartCheck,
+                onOpenReflection: onOpenReflection
+            )
+            .padding(.horizontal, YasumidokiTheme.contentPadding)
+            .padding(.top, 8)
+            .padding(.bottom, 8)
         }
-        .background(YasumidokiTheme.pageBackground)
+        .background(YasumidokiTheme.pageBackground.ignoresSafeArea())
         .navigationBarTitleDisplayMode(.inline)
     }
 }
