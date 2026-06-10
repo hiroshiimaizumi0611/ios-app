@@ -91,7 +91,7 @@ struct RecoveryActionView: View {
     }
 
     private var timerScene: some View {
-        ZStack(alignment: .bottom) {
+        VStack(spacing: 14) {
             ZStack {
                 Circle()
                     .stroke(YasumidokiTheme.butter.opacity(0.32), lineWidth: 13)
@@ -118,24 +118,24 @@ struct RecoveryActionView: View {
                         .contentTransition(reduceMotion ? .identity : .numericText())
                 }
             }
-            .frame(width: 210, height: 210)
+            .frame(width: 190, height: 190)
             .accessibilityElement(children: .ignore)
             .accessibilityLabel(isFinished ? "回復アクションが完了しました" : "残り\(remainingSeconds)秒")
 
             Image("HomeRoomIllustration")
                 .resizable()
                 .scaledToFill()
-                .frame(width: 190, height: 118)
-                .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
+                .frame(width: 220, height: 88)
+                .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
                 .overlay {
-                    RoundedRectangle(cornerRadius: 28, style: .continuous)
+                    RoundedRectangle(cornerRadius: 24, style: .continuous)
                         .strokeBorder(.white.opacity(0.62), lineWidth: 1)
                 }
-                .shadow(color: YasumidokiTheme.shadow.opacity(0.10), radius: 16, y: 8)
-                .offset(y: 18)
+                .shadow(color: YasumidokiTheme.shadow.opacity(0.08), radius: 12, y: 6)
                 .accessibilityHidden(true)
         }
-        .padding(.bottom, 12)
+        .frame(maxWidth: 220)
+        .padding(.bottom, 4)
     }
 
     private func startCountdown() async {
