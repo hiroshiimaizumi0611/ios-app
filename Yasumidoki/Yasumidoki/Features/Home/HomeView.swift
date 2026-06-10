@@ -5,7 +5,7 @@ struct HomeView: View {
     let companionState: CompanionState
     let onStartCheck: () -> Void
     let onOpenReflection: () -> Void
-    @ScaledMetric(relativeTo: .largeTitle) private var heroHeight: CGFloat = 520
+    @ScaledMetric(relativeTo: .largeTitle) private var heroHeight: CGFloat = 472
 
     var body: some View {
         VStack(spacing: 0) {
@@ -35,8 +35,8 @@ struct HomeView: View {
                         QuietStatusPill(text: "今日はここまででOK")
                     }
                     .padding(.horizontal, YasumidokiTheme.contentPadding)
-                    .padding(.top, -72)
-                    .padding(.bottom, 26)
+                    .padding(.top, -56)
+                    .padding(.bottom, 24)
                 }
                 .frame(maxWidth: .infinity)
             }

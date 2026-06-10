@@ -13,57 +13,59 @@ struct FatigueCheckView: View {
             RoomBackdropView(imageOpacity: 0.50, blurRadius: 2)
                 .ignoresSafeArea()
 
-            ScrollView(showsIndicators: false) {
-                VStack(spacing: 18) {
-                    SoftScreenHeader(title: "やすみどき")
+            VStack(spacing: 18) {
+                SoftScreenHeader(title: "やすみどき")
 
-                    SoftPanel(horizontalPadding: 18, verticalPadding: 28) {
-                        VStack(spacing: 22) {
-                            VStack(spacing: 10) {
-                                Image(systemName: "leaf.fill")
-                                    .font(.title3.weight(.semibold))
-                                    .foregroundStyle(YasumidokiTheme.sage)
-                                    .accessibilityHidden(true)
+                ScrollView(showsIndicators: false) {
+                    VStack(spacing: 18) {
+                        SoftPanel(horizontalPadding: 18, verticalPadding: 28) {
+                            VStack(spacing: 22) {
+                                VStack(spacing: 10) {
+                                    Image(systemName: "leaf.fill")
+                                        .font(.title3.weight(.semibold))
+                                        .foregroundStyle(YasumidokiTheme.sage)
+                                        .accessibilityHidden(true)
 
-                                Text("いまのつかれは？")
-                                    .font(.system(.title2, design: .rounded).weight(.semibold))
-                                    .foregroundStyle(YasumidokiTheme.primaryText)
+                                    Text("いまのつかれは？")
+                                        .font(.system(.title2, design: .rounded).weight(.semibold))
+                                        .foregroundStyle(YasumidokiTheme.primaryText)
 
-                                Text("正確に選ばなくて大丈夫。いま近いものをひとつだけ。")
-                                    .font(.subheadline)
-                                    .multilineTextAlignment(.center)
-                                    .foregroundStyle(YasumidokiTheme.secondaryText)
-                                    .fixedSize(horizontal: false, vertical: true)
-                            }
+                                    Text("正確に選ばなくて大丈夫。いま近いものをひとつだけ。")
+                                        .font(.subheadline)
+                                        .multilineTextAlignment(.center)
+                                        .foregroundStyle(YasumidokiTheme.secondaryText)
+                                        .fixedSize(horizontal: false, vertical: true)
+                                }
 
-                            VStack(spacing: 12) {
-                                ForEach(FatigueType.allCases) { fatigueType in
-                                    fatigueButton(for: fatigueType)
+                                VStack(spacing: 12) {
+                                    ForEach(FatigueType.allCases) { fatigueType in
+                                        fatigueButton(for: fatigueType)
+                                    }
                                 }
                             }
                         }
-                    }
 
-                    SoftPanel(horizontalPadding: 18, verticalPadding: 16, cornerRadius: 26) {
-                        HStack(alignment: .top, spacing: 14) {
-                            SoftIconBubble(systemImage: "pencil", tint: YasumidokiTheme.peach, size: 54)
+                        SoftPanel(horizontalPadding: 18, verticalPadding: 16, cornerRadius: 26) {
+                            HStack(alignment: .top, spacing: 14) {
+                                SoftIconBubble(systemImage: "pencil", tint: YasumidokiTheme.peach, size: 54)
 
-                            TextField("ひとことメモ（任意）", text: $memo, axis: .vertical)
-                                .font(.body)
-                                .foregroundStyle(YasumidokiTheme.primaryText)
-                                .lineLimit(2...4)
+                                TextField("ひとことメモ（任意）", text: $memo, axis: .vertical)
+                                    .font(.body)
+                                    .foregroundStyle(YasumidokiTheme.primaryText)
+                                    .lineLimit(2...4)
+                            }
                         }
-                    }
 
-                    PrimaryButton(isSaving ? "保存しています" : "相棒に伝える", systemImage: "sparkle") {
-                        continueToRecovery()
+                        PrimaryButton(isSaving ? "保存しています" : "相棒に伝える", systemImage: "sparkle") {
+                            continueToRecovery()
+                        }
+                        .disabled(selectedFatigueType == nil || isSaving)
+                        .opacity(selectedFatigueType == nil || isSaving ? 0.48 : 1)
+                        .padding(.horizontal, 26)
+                        .padding(.bottom, 28)
                     }
-                    .disabled(selectedFatigueType == nil || isSaving)
-                    .opacity(selectedFatigueType == nil || isSaving ? 0.48 : 1)
-                    .padding(.horizontal, 26)
-                    .padding(.bottom, 28)
+                    .padding(.horizontal, YasumidokiTheme.contentPadding)
                 }
-                .padding(.horizontal, YasumidokiTheme.contentPadding)
             }
         }
         .background(YasumidokiTheme.pageBackground)
