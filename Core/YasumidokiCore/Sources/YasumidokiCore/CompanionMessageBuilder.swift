@@ -2,8 +2,12 @@ public struct CompanionMessageBuilder: Sendable {
     public init() {}
 
     public func homeGreeting(for state: CompanionState) -> String {
-        if let reaction = state.reaction, reaction.kind == .completedRecovery {
-            return reaction.message
+        if state.reaction?.kind == .completedRecovery {
+            if let actionTitle = state.memory?.latestCompletedActionTitle {
+                return "\(actionTitle)、ちゃんと覚えています"
+            }
+
+            return "ひと息、ちゃんと覚えています"
         }
 
         if let fatigue = state.memory?.latestFatigueType {

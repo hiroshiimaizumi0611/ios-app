@@ -35,4 +35,19 @@ struct CompanionMessageBuilderTests {
         #expect(builder.completionMessage(for: state).contains("覚え"))
         #expect(builder.completionMessage(for: state).contains("連続") == false)
     }
+
+    @Test("home message keeps completion memory concise")
+    func compactCompletionHomeMessage() {
+        let state = CompanionState(
+            memory: CompanionMemory(latestCompletedActionTitle: "目を閉じて休む"),
+            reaction: CompanionReaction(
+                kind: .completedRecovery,
+                message: "「目を閉じて休む」ができたこと、相棒が覚えました。",
+                createdAt: Date(timeIntervalSince1970: 1_000)
+            )
+        )
+        let builder = CompanionMessageBuilder()
+
+        #expect(builder.homeGreeting(for: state) == "目を閉じて休む、ちゃんと覚えています")
+    }
 }

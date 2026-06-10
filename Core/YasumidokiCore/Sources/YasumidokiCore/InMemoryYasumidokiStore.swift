@@ -61,7 +61,7 @@ public actor InMemoryYasumidokiStore: YasumidokiStore {
         )
         currentSnapshot.companionState.reaction = CompanionReaction(
             kind: .completedRecovery,
-            message: "\(action.title)できたこと、相棒が覚えました。",
+            message: "「\(action.title)」ができたこと、相棒が覚えました。",
             mood: "warm",
             createdAt: completedAt
         )
