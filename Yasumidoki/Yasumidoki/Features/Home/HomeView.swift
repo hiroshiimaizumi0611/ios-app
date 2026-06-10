@@ -6,6 +6,7 @@ struct HomeView: View {
     let onStartCheck: () -> Void
     let onOpenReflection: () -> Void
     @ScaledMetric(relativeTo: .largeTitle) private var heroHeight: CGFloat = 472
+    private let messageBuilder = CompanionMessageBuilder()
 
     var body: some View {
         VStack(spacing: 0) {
@@ -17,7 +18,7 @@ struct HomeView: View {
                     VStack(spacing: 16) {
                         SoftActionCard(
                             title: "今日のつかれを見てみる",
-                            subtitle: companionState.growthLevel > 0 ? "相棒と一緒に、いまの感じをひとつだけ" : "ひとつ選ぶだけでOK",
+                            subtitle: messageBuilder.homeActionSubtitle(for: companionState),
                             systemImage: "camera.macro",
                             accent: YasumidokiTheme.sage,
                             isProminent: true,

@@ -3,6 +3,7 @@ import YasumidokiCore
 
 struct HomeRoomHeroView: View {
     let companionState: CompanionState
+    private let messageBuilder = CompanionMessageBuilder()
 
     var body: some View {
         GeometryReader { proxy in
@@ -56,7 +57,7 @@ struct HomeRoomHeroView: View {
     }
 
     private var greeting: String {
-        companionState.growthLevel > 0 ? "相棒がそばで休んでいます" : "おかえりなさい"
+        messageBuilder.homeGreeting(for: companionState)
     }
 
     private var todayText: String {
