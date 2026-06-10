@@ -8,7 +8,9 @@
   - Recovery action: calmer timer presentation and stronger room/companion continuity.
   - Completion: make the small room change feel visible and emotionally satisfying.
   - Reflection: keep it gentle, less like an analytics dashboard.
-- [ ] Manually review the updated screens in Simulator and tune final spacing, image crops, and copy.
+- [x] Manually review the updated screens in Simulator and tune final spacing, image crops, and copy.
+  - Merged in PR #3: home spacing, fatigue check safe-area header, and readable recovery timer layout.
+- [x] Write the implementation plan for companion memory and reactions.
 
 ## Next
 
