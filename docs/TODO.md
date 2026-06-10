@@ -11,14 +11,16 @@
 - [x] Manually review the updated screens in Simulator and tune final spacing, image crops, and copy.
   - Merged in PR #3: home spacing, fatigue check safe-area header, and readable recovery timer layout.
 - [x] Write the implementation plan for companion memory and reactions.
-
-## Next
-
-- [ ] Add companion memory and reactions.
+- [x] Add companion memory and reactions.
   - Let the companion remember the latest fatigue check and recovery completion.
   - Show a short home message based on the user's recent state.
   - React after completion with a small expression, room light, or unlocked object.
   - Avoid streak pressure; make the feeling "the companion noticed me" rather than "I must keep going."
+  - Verified in Simulator: `情報疲れ` -> recovery completion -> home memory message.
+
+## Next
+
+- [ ] Tune companion copy after trying the loop for a few real sessions.
 
 ## Later
 
