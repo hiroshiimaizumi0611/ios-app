@@ -43,6 +43,20 @@ public actor FileBackedYasumidokiStore: YasumidokiStore {
             optionalMemo: trimmedMemo?.isEmpty == true ? nil : trimmedMemo
         )
         currentSnapshot.checks.append(check)
+        currentSnapshot.companionState.memory = CompanionMemory(
+            latestFatigueType: fatigueType,
+            latestMemoPreview: check.optionalMemo,
+            latestCheckAt: createdAt,
+            latestCompletedActionTitle: currentSnapshot.companionState.memory?.latestCompletedActionTitle,
+            latestCompletionAt: currentSnapshot.companionState.memory?.latestCompletionAt
+        )
+        currentSnapshot.companionState.reaction = CompanionReaction(
+            kind: .noticedFatigue,
+            message: "\(fatigueType.displayName)、ちゃんと受け取りました。",
+            mood: "noticed",
+            createdAt: createdAt
+        )
+        currentSnapshot.companionState.lastInteractionAt = createdAt
         try save()
         return check
     }
@@ -59,6 +73,19 @@ public actor FileBackedYasumidokiStore: YasumidokiStore {
             linkedFatigueCheckID: linkedFatigueCheckID
         )
         currentSnapshot.completions.append(completion)
+        currentSnapshot.companionState.memory = CompanionMemory(
+            latestFatigueType: currentSnapshot.companionState.memory?.latestFatigueType,
+            latestMemoPreview: currentSnapshot.companionState.memory?.latestMemoPreview,
+            latestCheckAt: currentSnapshot.companionState.memory?.latestCheckAt,
+            latestCompletedActionTitle: action.title,
+            latestCompletionAt: completedAt
+        )
+        currentSnapshot.companionState.reaction = CompanionReaction(
+            kind: .completedRecovery,
+            message: "「\(action.title)」ができたこと、相棒が覚えました。",
+            mood: "warm",
+            createdAt: completedAt
+        )
         currentSnapshot.companionState.growthLevel += 1
         currentSnapshot.companionState.lastInteractionAt = completedAt
         if currentSnapshot.companionState.growthLevel == 1 {

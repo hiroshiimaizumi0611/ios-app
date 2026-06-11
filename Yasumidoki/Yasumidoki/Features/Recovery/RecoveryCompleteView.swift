@@ -5,6 +5,7 @@ struct RecoveryCompleteView: View {
     let companionState: CompanionState
     let onRecordCompletion: () async -> Void
     let onReturnHome: () -> Void
+    private let messageBuilder = CompanionMessageBuilder()
 
     @State private var didRecordCompletion = false
 
@@ -31,7 +32,7 @@ struct RecoveryCompleteView: View {
                                         .multilineTextAlignment(.center)
                                         .foregroundStyle(YasumidokiTheme.primaryText)
 
-                                    Text("ひと息つけたことを、相棒が覚えてくれました。")
+                                    Text(messageBuilder.completionMessage(for: companionState))
                                         .font(.body)
                                         .multilineTextAlignment(.center)
                                         .foregroundStyle(YasumidokiTheme.secondaryText)
